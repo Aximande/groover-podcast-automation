@@ -9,8 +9,7 @@ import os
 from typing import Dict, List, Optional
 from openai import OpenAI
 from dotenv import load_dotenv
-from fuzzywuzzy import process
-import spacy
+# Removed: fuzzywuzzy and spaCy (not needed anymore)
 
 load_dotenv()
 
@@ -21,7 +20,6 @@ class CorrectionService:
     def __init__(self, glossary_path: str = "data/music_glossary.json"):
         self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
         self.glossary = self._load_glossary(glossary_path)
-        self.nlp = None  # Lazy load spaCy
 
     def _load_glossary(self, path: str) -> Dict:
         """Load music industry glossary"""
@@ -30,15 +28,7 @@ class CorrectionService:
                 return json.load(f)
         return {}
 
-    def _load_spacy(self):
-        """Lazy load spaCy model"""
-        if self.nlp is None:
-            try:
-                self.nlp = spacy.load('en_core_web_sm')
-            except OSError:
-                # Model not downloaded
-                return None
-        return self.nlp
+    # Removed _load_spacy - not needed anymore
 
     def get_glossary_terms(self, custom_terms: Optional[List[str]] = None) -> str:
         """
@@ -173,22 +163,8 @@ Output only the corrected transcript without any explanations or notes."""
         Returns:
             List of identified entities
         """
-        nlp = self._load_spacy()
-        if nlp is None:
-            return []
-
-        doc = nlp(text)
-        entities = []
-
-        for ent in doc.ents:
-            entities.append({
-                'text': ent.text,
-                'label': ent.label_,
-                'start': ent.start_char,
-                'end': ent.end_char
-            })
-
-        return entities
+        # spaCy removed - no longer needed
+        return []
 
     def get_correction_prompt(self, custom_terms: Optional[List[str]] = None) -> str:
         """

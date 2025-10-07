@@ -11,10 +11,10 @@ pydub==0.25.1
 # Environment & Configuration
 python-dotenv==1.0.0
 
-# Natural Language Processing
-spacy==3.5.3
-fuzzywuzzy==0.18.0
-python-Levenshtein==0.21.0
+# Natural Language Processing (removed - not needed anymore)
+# spacy==3.5.3
+# fuzzywuzzy==0.18.0
+# python-Levenshtein==0.21.0
 
 # Language Detection & Translation
 langdetect==1.0.9
