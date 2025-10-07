@@ -7,6 +7,7 @@ anthropic>=0.18.0
 
 # Audio Processing
 pydub>=0.25.1
+audioop-lts  # Compatibility for Python 3.13+
 
 # Environment & Configuration
 python-dotenv>=1.0.0
